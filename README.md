@@ -1,4 +1,4 @@
-# instaCSharp
+# instaCSharp 📸
 A C# API Library For Instagram Automation
 
 Current Features:
