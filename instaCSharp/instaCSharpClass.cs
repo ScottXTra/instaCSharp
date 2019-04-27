@@ -12,7 +12,7 @@ namespace instaCSharp
     public class instaCSharpClass
     {
         public static String myAccount;
-        public static int loginWait = 2000;
+        public static int loginWait = 3000;
         public static Random rnd = new Random();
         public static bool followCheckRunning = false;
         public static bool likeUsersLastPostRunning = false;
@@ -42,11 +42,9 @@ namespace instaCSharp
             var service = ChromeDriverService.CreateDefaultService();
             service.HideCommandPromptWindow = true;
             ChromeOptions options = new ChromeOptions();
-            //string userName = Environment.UserName
-            //options.AddArguments("user-data-dir=C:/Users/" + userName + "/AppData/Local/Google/Chrome/User Data");
             //options.AddArgument("--headless");
             options.AddArgument("--disable-extensions");
-            options.AddArgument("--window-position=0,200");
+            options.AddArgument("--window-position=0,300");
             options.EnableMobileEmulation("iPhone 7");
             #endregion
             IWebDriver dvr = new ChromeDriver(service, options);
@@ -57,12 +55,11 @@ namespace instaCSharp
             Console.ForegroundColor = color;
             Console.WriteLine(text);
             Console.ForegroundColor = ConsoleColor.White;
-
         }
         public void login(IWebDriver dvr, String username, String passWord)
         {
-            dvr.Navigate().GoToUrl("https://www.instagram.com/accounts/login/");
             
+            dvr.Navigate().GoToUrl("https://www.instagram.com/accounts/login/");
             IWebElement userNameBox = dvr.FindElement(By.Name("username"));
             userNameBox.SendKeys(username);
             IWebElement passwordBox = dvr.FindElement(By.Name("password"));
@@ -72,6 +69,8 @@ namespace instaCSharp
             IWebElement notNowButton = dvr.FindElement(By.XPath("//section/main/div/button"));
             notNowButton.Click();
             myAccount = username;
+            logData.Add("Logging into instagram " + DateTime.Now.ToString("h:mm:ss tt"));
+            //Console.Clear();
         }
         public void gotoIMP(IWebDriver dvr)
         {
@@ -191,6 +190,7 @@ namespace instaCSharp
             logData.Add("Downloaded my following " + DateTime.Now.ToString("h:mm:ss tt"));
             return following;
         }
+        //DEBUG FUNCTION
         public void followCheck(IWebDriver dvr)
         {
 
@@ -246,8 +246,9 @@ namespace instaCSharp
             }
             logData.Add("Preformed follower check " + DateTime.Now.ToString("h:mm:ss tt"));
             followCheckRunning = false;
-            
+
         }
+
         public bool follow(IWebDriver dvr, String userName)
         {
             followRunning = true;
@@ -315,7 +316,6 @@ namespace instaCSharp
             test.SendKeys(Keys.Enter);
             List<string> followers = new List<string>();
             Actions actions = new Actions(dvr);
-            printf("Scraping...", ConsoleColor.Gray);
             Thread.Sleep(2000);
             IWebElement user;
             for (int i = 1; i < max; i++)
@@ -324,14 +324,11 @@ namespace instaCSharp
                 {
                     user = dvr.FindElement(By.XPath("//div[2]/ul/div/li[" + i + "]/div/div[1]/div[2]/div[1]/a"));
                     followers.Add(user.Text);
-                    Console.Title = "Insta-Man Scraped " + i + " usernames";
                     if (i % 80 == 0)
                     {
-
                         actions.MoveToElement(user);
                         actions.Perform();
                     }
-                    //Console.WriteLine(user.Text);
                 }
                 catch
                 {
@@ -346,10 +343,7 @@ namespace instaCSharp
             tw.Close();
             logData.Add("Scraped followers of " + userName + " " + DateTime.Now.ToString("h:mm:ss tt"));
             scrapeUsersRunning = false;
-            
-
             return followers;
-
         }
         public void likeUsersLastPost(IWebDriver dvr, String userName)
         {
@@ -421,6 +415,29 @@ namespace instaCSharp
             printf("                                               v0.1 By Scott", ConsoleColor.DarkYellow);
 
         }
-        
+        public void loggerStarter()
+        {
+            Thread t1 = new Thread(delegate ()
+            {
+                logger();
+            });
+            t1.Start();
+        }
+        public void logger()
+        {
+            while (true)
+            {
+                foreach (String s in logData)
+                {
+                    using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"log.txt", true))
+                    {
+                        file.WriteLine(s);
+                    }
+                }
+                logData.Clear();
+                Thread.Sleep(5000);
+            }
+        }
+
     }
 }
