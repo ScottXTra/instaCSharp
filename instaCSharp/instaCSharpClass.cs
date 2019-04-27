@@ -412,7 +412,7 @@ namespace instaCSharp
     \|__|\|__| \|__|\_________\   \|__|  \|__|\|__|               \|__|     \|__|\|__|\|__|\|__| \|__|
                    \|_________|                                                                       ", ConsoleColor.DarkCyan);
             printf("------------------------------------------------------------------------------------------------------", ConsoleColor.DarkCyan);
-            printf("                                               v0.1 By Scott", ConsoleColor.DarkYellow);
+            printf("                                               v0.2 By Scott", ConsoleColor.DarkYellow);
 
         }
         public void loggerStarter()
