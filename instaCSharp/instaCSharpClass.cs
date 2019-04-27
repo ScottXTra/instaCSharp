@@ -12,7 +12,7 @@ namespace instaCSharp
     public class instaCSharpClass
     {
         public static String myAccount;
-        public static int loginWait = 3000;
+        public static int loginWait = 2000;
         public static Random rnd = new Random();
         public static bool followCheckRunning = false;
         public static bool likeUsersLastPostRunning = false;
