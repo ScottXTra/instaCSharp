@@ -14,7 +14,7 @@ Current Features:
   - Logger
   
 Planned Features:
-  - Cookie support
+  - Cookie Support
   - Upload Photos
   - Agressive Error Checking
   - Data Ploter
