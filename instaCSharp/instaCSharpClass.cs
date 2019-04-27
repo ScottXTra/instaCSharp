@@ -58,7 +58,6 @@ namespace instaCSharp
         }
         public void login(IWebDriver dvr, String username, String passWord)
         {
-            
             dvr.Navigate().GoToUrl("https://www.instagram.com/accounts/login/");
             IWebElement userNameBox = dvr.FindElement(By.Name("username"));
             userNameBox.SendKeys(username);
