@@ -1,5 +1,5 @@
 # instaCSharp 📸
-A C# API Library For Instagram Automation
+A C# API Library For Instagram Automation Using Selenium
 
 Current Features:
   - Auto login
