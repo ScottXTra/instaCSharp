@@ -1,4 +1,4 @@
-# instaCSharp 📸
+# instaCSharp Beta 📸
 A C# API Library For Instagram Automation Using Selenium
 
 Current Features:
