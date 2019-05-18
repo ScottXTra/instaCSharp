@@ -3,7 +3,7 @@ A C# API Library For Instagram Automation Using Selenium
 
 Current Features:
   - Auto login
-  - Follow Check
+  - Follower Check
   - Get My Followers
   - Get My Following
   - Follow User
