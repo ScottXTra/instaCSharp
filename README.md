@@ -19,3 +19,5 @@ Planned Features:
   - Agressive Error Checking
   - Data Ploter
   - Notification System
+  
+  Disclaimer: I wrote this whole api in less than 8 hours but I then I got board. Il fix it later
